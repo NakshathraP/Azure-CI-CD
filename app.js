@@ -33,7 +33,22 @@ app.get("/", (req,res) => {
             
             @-webkit-keyframes fall { to {margin-top: 900px;}}
             @-moz-keyframes fall { to {margin-top: 900px;}}
-            
+
+            .center-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            color: #333;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            }
+                    
             </style>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
             <script>
@@ -57,6 +72,10 @@ app.get("/", (req,res) => {
             </head>
             <body onload="createRain()">
             <section id="rain" class="rain"></section>
+            <div class="center-box">
+            <h2>DevOps CIA</h2>
+            <p>Text in the box!</p>
+            </div>
             </body>
             </html>`
     );
