@@ -9,46 +9,59 @@ app.get("/", (req,res) => {
     res.send(`
             <!DOCTYPE html>
             <html>
-                <head>
-                    <title>Map Views</title>
-                    <meta charset="utf-8" />
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <!-- Get the leaflet CSS file -->
-                    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
-                </head>
-                <body>
-                    <h1>Map View</h1>
-                    <!-- Specify the map and it's dimensions -->
-                    <div id="map" style="width: 960px; height: 500px"></div>
-                    <!-- Get the leaflet JavaScript file -->
-                    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
-                    <script>
-                        // Initialize the map
-                        const map = L.map('map')
-
-                        // Get the tile layer from OpenStreetMaps
-                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                            // Specify the maximum zoom of the map
-                            maxZoom: 19,
-                            // Set the attribution for OpenStreetMaps
-                            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        }).addTo(map);
-                        // Set the view of the map
-                        // with the latitude, longitude and the zoom value
-                        map.setView([48.8584, 2.2945], 16);
-                        // Set the map view to the user's location
-                        // Uncomment below to set map according to user location
-                        // map.locate({setView: true, maxZoom: 16});
-                        // Show a market at the position of the Eiffel Tower
-                        let eiffelMarker = L.marker([48.8584, 2.2945]).addTo(map);
-                        // Bind popup to the marker with a popup
-                        eiffelMarker.bindPopup("Eiffel Tower").openPopup();
-                    </script>
-                </body>
+            <head>
+            <style>
+            html {height: 100%; width:100%}
+            body {background: #0D343A;
+                background:-webkit-gradient(linear, 0% 0%, 0%, 100%, from(rgba(13,52,58,1)), to (#000000));
+                background:-moz-linear-gradient(top, rgba(13,52,58,1) 0%, rgba(0,0,0,1) 100%);
+                overflow: hidden;
+            }
+            .drop {
+            /*
+            background:-webkit-gradient(linear, 0% 0%, 0%, 100%, from(rgba(13,52,58,1)), to (rgba(255,255,255,0.6)));
+            background:-moz-linear-gradient(top, rgba(13,52,58,1) 0%, rgba(255,255,255,0.6) 100%);
+            */
+            background: #FFFFFF;
+            width: 1px;
+            height: 89px;
+            position: absolute;
+            bottom: 200px;
+            -webkit-animation: fall .63s linear infinite;
+            -moz-animation: fall .63s linear infinite;
+            }
+            
+            @-webkit-keyframes fall { to {margin-top: 900px;}}
+            @-moz-keyframes fall { to {margin-top: 900px;}}
+            
+            </style>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+            <script>
+            var nbDrop = 800;
+            
+            function randRange(maxNum, minNum) {
+                return (Math.floor(Math.random(10) * (maxNum - minNum + 1)) + minNum);
+            }
+            
+            function createRain() {
+                for (i = 0; i < nbDrop; i++) {
+                
+                var dropLeft = randRange(0, 3000);
+                var dropTop = randRange(-1000, 1000);
+                $('.rain').append('<div class="drop" id="drop'+ i +'"></div>');
+                $('#drop' + i).css('left', dropLeft);
+                $('#drop' + i).css('top', dropTop); 
+                }
+            }
+            </script>
+            </head>
+            <body onload="createRain()">
+            <section id="rain" class="rain"></section>
+            </body>
             </html>`
     );
 })
 
 app.listen(8080, () => {
-    console.log("application is running at Port: 3000");
+    console.log("Application is running at Port: 3000");
 })
