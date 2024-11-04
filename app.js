@@ -10,7 +10,7 @@ app.get("/", (req,res) => {
             <!DOCTYPE html>
             <html>
                 <head>
-                    <title>Map View</title>
+                    <title>Map Views</title>
                     <meta charset="utf-8" />
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
                     <!-- Get the leaflet CSS file -->
