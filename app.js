@@ -74,7 +74,8 @@ app.get("/", (req,res) => {
             <section id="rain" class="rain"></section>
             <div class="center-box">
             <h2>DevOps CIA</h2>
-            <p>Text in the box!</p>
+            <p>Text in the box!
+            Updated</p>
             </div>
             </body>
             </html>`
